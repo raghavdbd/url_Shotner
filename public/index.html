@@ -1,0 +1,60 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>URL Shortener</title>
+  <style>
+    /* Basic styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    input {
+      width: 300px;
+      padding: 8px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 8px 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>URL Shortener</h1>
+  <form id="shortenForm">
+    <input type="text" id="urlInput" placeholder="Enter URL to shorten">
+    <input type="text" id="aliasInput" placeholder="Custom Alias (optional)">
+    <button type="submit">Shorten</button>
+  </form>
+  <div id="shortenedUrl"></div>
+
+  <script>
+    document.getElementById('shortenForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const url = document.getElementById('urlInput').value;
+      const customAlias = document.getElementById('aliasInput').value;
+
+      fetch('/api/shorten', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ url, customAlias }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('shortenedUrl').innerHTML = `
+          <p>Original URL: ${data.originalUrl}</p>
+          <p>Shortened URL: <a href="${data.shortenedUrl}" target="_blank">${data.shortenedUrl}</a></p>
+        `;
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    });
+  </script>
+</body>
+</html>
