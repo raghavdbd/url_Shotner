@@ -7,8 +7,7 @@ const { nanoid } = require('nanoid');
 
 const app = express();
 app.use(express.json());
-const cors = require('cors');
-app.use(cors());
+
 
 const urlDatabase = {};
 
@@ -36,8 +35,8 @@ app.post('/api/shorten', (req, res) => {
     expiresIn: 2 * 60 * 60 * 1000, // Expiration time in milliseconds (2 hours)
   };
 
-  const deployedUrl = 'https://url-shotner-six.vercel.app'; 
-const shortenedUrl = `${deployedUrl}/${shortId}`;
+  const shortenedUrl = `http://localhost:3000/${shortId}`;
+
   res.json({ originalUrl: url, shortenedUrl });
 });
 
@@ -53,7 +52,7 @@ app.get('/:shortId', (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 7980;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
