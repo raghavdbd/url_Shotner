@@ -3,6 +3,8 @@
 
 const express = require('express');
 const { nanoid } = require('nanoid');
+const cors = require('cors');
+app.use(cors());
 
 const app = express();
 app.use(express.json());
