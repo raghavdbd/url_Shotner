@@ -37,13 +37,14 @@
       const url = document.getElementById('urlInput').value;
       const customAlias = document.getElementById('aliasInput').value;
 
-      fetch('/api/shorten', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ url, customAlias }),
-      })
+      fetch('https://url-shotner-six.vercel.app/api/shorten', { // Replace with your deployed backend URL
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ url, customAlias }),
+})
+
       .then(response => response.json())
       .then(data => {
         document.getElementById('shortenedUrl').innerHTML = `
