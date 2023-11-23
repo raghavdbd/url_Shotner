@@ -36,7 +36,8 @@ app.post('/api/shorten', (req, res) => {
     expiresIn: 2 * 60 * 60 * 1000, // Expiration time in milliseconds (2 hours)
   };
 
-  const shortenedUrl = `http://localhost:3000/${shortId}`;
+  const deployedUrl = 'https://url-shotner-six.vercel.app'; 
+const shortenedUrl = `${deployedUrl}/${shortId}`;
   res.json({ originalUrl: url, shortenedUrl });
 });
 
